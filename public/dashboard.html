@@ -36,3 +36,54 @@
       <tbody id="tbody"></tbody>
     </table>
   </div>
+
+<script>
+async function loadUsers(){
+  const res = await fetch('/users');
+  const users = await res.json();
+  const tbody = document.getElementById('tbody');
+  tbody.innerHTML = '';
+
+  users.forEach(u=>{
+    const tr = document.createElement('tr');
+
+    const statusClass = (u.status === 'active') ? 'status-active' : 'status-inactive';
+    tr.innerHTML = `
+      <td>${u.id}</td>
+      <td>${u.first_name}</td>
+      <td>${u.last_name}</td>
+      <td><textarea readonly style="width:100%;height:48px;">${u.apikey_value || '-'}</textarea></td>
+      <td class="${statusClass}">${u.status}</td>
+      <td>
+        <button class="btn btn-danger" onclick="deleteUser(${u.id})">Delete</button>
+        <button class="btn" style="margin-left:8px" onclick="toggleStatus(${u.apikey_id})">Toggle</button>
+      </td>
+    `;
+    tbody.appendChild(tr);
+  });
+}
+
+async function deleteUser(id){
+  if(!confirm('Hapus user ini?')) return;
+  await fetch('/users/' + id, { method: 'DELETE' });
+  loadUsers();
+}
+
+async function toggleStatus(apikey_id){
+  if(!apikey_id){ alert('No apikey'); return; }
+  const res = await fetch(`/apikeys/${apikey_id}/toggle`, { method: 'POST' });
+  const out = await res.json();
+  if(out.success) loadUsers();
+}
+
+function logout(){
+  localStorage.removeItem('admin_id');
+  window.location.href = 'index.html';
+}
+
+loadUsers();
+</script>
+
+</body>
+</html>
+
