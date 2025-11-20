@@ -27,3 +27,33 @@
     <a href="login.html">Sudah punya akun? Login</a>
   </div>
 
+<script>
+    async function registerAdmin() {
+      const email = document.getElementById("email").value.trim();
+      const password = document.getElementById("password").value.trim();
+
+      if (!email || !password) {
+        alert("Isi email dan password!");
+        return;
+      }
+
+      const res = await fetch("/admin/register", {        // <-- diperbaiki
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, password })
+      });
+
+      const out = await res.json();
+      console.log(out);
+
+      if (out.success) {
+        alert("Admin berhasil dibuat! Silakan login.");
+        window.location.href = "login.html";        // <-- diperbaiki
+      } else {
+        alert(out.message);
+      }
+    }
+  </script>
+
+</body>
+</html>
