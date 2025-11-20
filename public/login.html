@@ -24,3 +24,34 @@
 
   <button onclick="loginAdmin()">Login</button>
 </div>
+
+<script>
+async function loginAdmin() {
+  const email = document.getElementById("email").value.trim();
+  const password = document.getElementById("password").value.trim();
+
+  if (!email || !password) {
+    alert("Email & password harus diisi");
+    return;
+  }
+
+  const res = await fetch("/admin/login", {     // <-- ENDPOINT yg benar
+    method:"POST",
+    headers:{ "Content-Type":"application/json" },
+    body:JSON.stringify({ email, password })
+  });
+
+  const out = await res.json();
+  console.log(out);
+
+  if (out.success) {
+    alert("Login berhasil!");
+    window.location.href = "dashboard.html";
+  } else {
+    alert(out.message);
+  }
+}
+</script>
+
+</body>
+</html>
