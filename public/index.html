@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Pilih Role</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: Arial;
+      background: #f0f2f5;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .container {
+      text-align: center;
+      background: white;
+      padding: 40px;
+      border-radius: 12px;
+      width: 350px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.1);
+    }
+
+    h2 { margin-bottom: 20px; }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      margin-top: 15px;
+      border-radius: 6px;
+      border: none;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    .admin-btn { background: #007bff; color: white; }
+    .mahasiswa-btn { background: #28a745; color: white; }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <h2>Login sebagai</h2>
+
+  <button class="admin-btn" onclick="goAdmin()">Admin</button>
+  <button class="mahasiswa-btn" onclick="goUser()">Mahasiswa</button>
+</div>
+
+<script>
+function goAdmin() {
+  window.location.href = "admin-register.html"; // halaman login admin
+}
+
+function goUser() {
+  window.location.href = "register.html"; // halaman register mahasiswa
+}
+</script>
+
+</body>
+</html>
