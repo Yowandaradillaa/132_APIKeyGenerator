@@ -1,0 +1,50 @@
+/* public/style.css */
+body {
+  font-family: Arial, sans-serif;
+  background: #f3f4f6;
+  margin: 0;
+  padding: 0;
+}
+
+/* container card */
+.card {
+  background: #fff;
+  width: 380px;
+  padding: 22px;
+  border-radius: 12px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+  margin: 30px auto;
+}
+
+/* buttons */
+.btn {
+  display: inline-block;
+  width: 100%;
+  padding: 11px;
+  border-radius: 8px;
+  border: none;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.btn-primary { background:#0d6efd; color:#fff; }
+.btn-success { background:#28a745; color:#fff; }
+.btn-danger { background:#dc3545; color:#fff; }
+
+/* small table styles for dashboard */
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #fff;
+  margin: 20px auto;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.05);
+  border-radius: 8px;
+  overflow: hidden;
+}
+.table th, .table td {
+  padding: 12px 10px;
+  border-bottom: 1px solid #eee;
+  text-align: left;
+}
+.table th { background:#fafafa; font-weight:700; }
