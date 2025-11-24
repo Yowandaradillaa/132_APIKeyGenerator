@@ -77,6 +77,16 @@ app.post("/admin/register", async (req, res) => {
   );
 });
 
+app.get("/admin", (req, res) => {
+  const sql = "SELECT id, email FROM admin";
+
+  db.query(sql, (err, result) => {
+    if (err) return res.status(500).json({ error: err });
+    res.json(result);
+  });
+});
+
+
 // Login admin
 app.post("/admin/login", (req, res) => {
   const { email, password } = req.body;
@@ -91,6 +101,22 @@ app.post("/admin/login", (req, res) => {
     if (!match) return res.json({ success: false, message: "Password salah" });
 
     res.json({ success: true, admin: { id: admin.id, email: admin.email } });
+  });
+});
+
+app.delete("/admin/:id", (req, res) => {
+  const { id } = req.params;
+
+  const sql = "DELETE FROM admin WHERE id = ?";
+
+  db.query(sql, [id], (err, result) => {
+    if (err) return res.status(500).json({ error: err });
+
+    if (result.affectedRows === 0) {
+      return res.status(404).json({ message: "Admin not found" });
+    }
+
+    res.json({ message: "Admin deleted successfully" });
   });
 });
 
